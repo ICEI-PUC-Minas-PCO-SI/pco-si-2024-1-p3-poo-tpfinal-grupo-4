@@ -4,22 +4,27 @@
 
 `CURSO: Sistemas de Informação`
 
-`DISCIPLINA: Projeto - Projeto de Infraestrutura`
+`DISCIPLINA: Programação Orientada por Objetos`
 
-`Eixo: 5`
+`Tema: 1`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O trabalho contido aqui se trata da criação de um aplicativo voltado para controle de contas de energia, onde o software final buscará responder questionamentos básicos sobre a gestão das tarifas e cobranças realizadas, como por exemplo: 
+
+* Qual foi meu consumo de energia no último mês?
+* Qual é o valor total da minha conta?
+* Qual é o valor da minha conta sem impostos?
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
+* Jean Estanislau de Souza Guimarães
+* João Vitor de Souza França
+* Otávio Soares da Costa
+* Pedro Henrique Morais de Assis
+* Renato Haniel Silva
+* Victor Henry Salles 
 
 ## Orientador
 
-* Nome completo do professor 1
+* Fabio Leandro Rodrigues Cordeiro
 
 
