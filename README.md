@@ -8,7 +8,7 @@
 
 `Tema: 1`
 
-O trabalho contido aqui se trata da criação de um aplicativo voltado para controle de contas de energia, onde o software final buscará responder questionamentos básicos sobre a gestão das tarifas e cobranças realizadas, como por exemplo: 
+O trabalho contido aqui se trata da criação de um aplicativo voltado para controle de contas de energia, o software final buscará responder questionamentos básicos sobre a gestão das tarifas e cobranças realizadas, como por exemplo: 
 
 * Qual foi meu consumo de energia no último mês?
 * Qual é o valor total da minha conta?
