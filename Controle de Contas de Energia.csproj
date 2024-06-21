@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B96B5EB0-1282-41BE-8D76-5CAE3DC489CC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Controle_de_Contas_de_Energia</RootNamespace>
+    <AssemblyName>Controle de Contas de Energia</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\AppData.cs" />
+    <Compile Include="src\ContaComercial.cs" />
+    <Compile Include="src\ContaEnergia.cs" />
+    <Compile Include="src\ContaResidencial.cs" />
+    <Compile Include="src\ICobrancaImposto.cs" />
+    <Compile Include="src\LeituraConta.cs" />
+    <Compile Include="src\Pessoa.cs" />
+    <Compile Include="src\PessoaFisica.cs" />
+    <Compile Include="src\PessoaJuridica.cs" />
+    <Compile Include="TelaCalculoMensal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaCalculoMensal.Designer.cs">
+      <DependentUpon>TelaCalculoMensal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaNovaConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaNovaConta.Designer.cs">
+      <DependentUpon>TelaNovaConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaRelatorio.Designer.cs">
+      <DependentUpon>TelaRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaInicio.Designer.cs">
+      <DependentUpon>TelaInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>TelaCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="TelaCalculoMensal.resx">
+      <DependentUpon>TelaCalculoMensal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaNovaConta.resx">
+      <DependentUpon>TelaNovaConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaRelatorio.resx">
+      <DependentUpon>TelaRelatorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaCadastro.resx">
+      <DependentUpon>TelaCadastro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaInicio.resx">
+      <DependentUpon>TelaInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

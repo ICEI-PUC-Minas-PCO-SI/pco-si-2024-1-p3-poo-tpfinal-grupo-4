@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Pessoas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Pessoa xsi:type="PessoaFisica">
+    <Cadastro>111</Cadastro>
+    <ContasEnergia>
+      <ContaEnergia xsi:type="ContaComercial">
+        <Registro>wI6ZCGOO</Registro>
+        <MesReferencia>
+          <Periodo>1</Periodo>
+          <Exercicio>2024</Exercicio>
+          <Consumo_kWh>100</Consumo_kWh>
+        </MesReferencia>
+        <MesAnterior>
+          <Periodo>12</Periodo>
+          <Exercicio>2023</Exercicio>
+          <Consumo_kWh>0</Consumo_kWh>
+        </MesAnterior>
+      </ContaEnergia>
+      <ContaEnergia xsi:type="ContaComercial">
+        <Registro>dLuSRDq3</Registro>
+        <MesReferencia>
+          <Periodo>2</Periodo>
+          <Exercicio>2024</Exercicio>
+          <Consumo_kWh>50</Consumo_kWh>
+        </MesReferencia>
+        <MesAnterior>
+          <Periodo>1</Periodo>
+          <Exercicio>2024</Exercicio>
+          <Consumo_kWh>30</Consumo_kWh>
+        </MesAnterior>
+      </ContaEnergia>
+      <ContaEnergia xsi:type="ContaResidencial">
+        <Registro>aRcqhVwT</Registro>
+        <MesReferencia>
+          <Periodo>4</Periodo>
+          <Exercicio>2024</Exercicio>
+          <Consumo_kWh>100</Consumo_kWh>
+        </MesReferencia>
+        <MesAnterior>
+          <Periodo>3</Periodo>
+          <Exercicio>2024</Exercicio>
+          <Consumo_kWh>10</Consumo_kWh>
+        </MesAnterior>
+      </ContaEnergia>
+    </ContasEnergia>
+  </Pessoa>
+</Pessoas>

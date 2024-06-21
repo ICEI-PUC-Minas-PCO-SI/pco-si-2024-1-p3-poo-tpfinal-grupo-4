@@ -1,0 +1,14 @@
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\bin\Debug\Controle de Contas de Energia.exe.config
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\bin\Debug\Controle de Contas de Energia.exe
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\bin\Debug\Controle de Contas de Energia.pdb
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle de Contas de Energia.csproj.AssemblyReference.cache
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.TelaCadastro.resources
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.TelaInicio.resources
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.Properties.Resources.resources
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle de Contas de Energia.csproj.GenerateResource.cache
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle de Contas de Energia.csproj.CoreCompileInputs.cache
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle de Contas de Energia.exe
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle de Contas de Energia.pdb
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.src.TelaNovaConta.resources
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.src.TelaRelatorio.resources
+C:\Users\João França\Desktop\PUCWorkspace\ContasEnergia\Controle de Contas de Energia\obj\Debug\Controle_de_Contas_de_Energia.TelaCalculoMensal.resources
