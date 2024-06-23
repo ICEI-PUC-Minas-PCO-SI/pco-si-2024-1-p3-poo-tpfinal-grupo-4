@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    [Serializable]
+    [XmlInclude(typeof(PessoaFisica))]
+    [XmlInclude(typeof(PessoaJuridica))]
+    public abstract class Pessoa
+    {
+        private string cadastro;
+        private List<ContaEnergia> contasEnergia = new List<ContaEnergia>();
+
+        public string Cadastro { get => cadastro; set => cadastro = value; }
+        public List<ContaEnergia> ContasEnergia { get => contasEnergia; set => contasEnergia = value; }
+
+        public float GetConsumoMensal(int mes, int ano)
+        {
+            float total = 0;
+            foreach (ContaEnergia conta in contasEnergia)
+            {
+                if (conta.MesReferencia.Periodo == mes && conta.MesReferencia.Exercicio == ano) { total += conta.MesReferencia.Consumo_kWh; }
+                else if (conta.MesAnterior.Periodo == mes && conta.MesAnterior.Exercicio == ano) { total += conta.MesAnterior.Consumo_kWh; }
+            }
+            return total;
+        }
+    }
+}

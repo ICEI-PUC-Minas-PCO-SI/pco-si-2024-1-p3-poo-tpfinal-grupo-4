@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Xml.Serialization;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    [Serializable]
+    [XmlInclude(typeof(ContaComercial))]
+    [XmlInclude(typeof(ContaResidencial))]
+    public abstract class ContaEnergia
+    {
+        private string registro;
+        private LeituraConta mesReferencia;
+        private LeituraConta mesAnterior;
+
+        [XmlIgnore]
+        protected float tarifa;
+        public string Registro { get => registro; set => registro = value; }
+        public LeituraConta MesReferencia { get => mesReferencia; set => mesReferencia = value; }
+        public LeituraConta MesAnterior { get => mesAnterior; set => mesAnterior = value; }
+
+        public abstract float CalculaValor();
+    }
+}

@@ -1,0 +1,96 @@
+﻿using Controle_de_Contas_de_Energia.src;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    internal class AppData
+    {
+        private Pessoa consumidor_utilizado;
+        private List<Pessoa> pessoas = new List<Pessoa>();
+        private string pessoas_path = Directory.GetCurrentDirectory() + "\\..\\..\\data\\pessoas.xml";
+        private bool need_to_save = false;
+
+        public bool LogIn(string cadastro)
+        {
+            Pessoa loggingUser = pessoas.Find(e => e.Cadastro == cadastro);
+            if (loggingUser == null) { return false; }
+            consumidor_utilizado = loggingUser;
+            return true;
+        }
+
+        public Pessoa GetConsumidorAtual()
+        {
+            return consumidor_utilizado;
+        }
+
+        private void ReadAppData()
+        {
+            if (!File.Exists(pessoas_path)) { return; }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Pessoa>), new XmlRootAttribute("Pessoas"));
+
+            using (StreamReader reader = new StreamReader(pessoas_path))
+            {
+                pessoas = (List<Pessoa>) serializer.Deserialize(reader);
+            }
+        }
+
+        public bool Create(Pessoa pessoa)
+        {
+            if (pessoas.Find(e => e.Cadastro == pessoa.Cadastro) != null)
+            {
+                return false;
+            }
+            pessoas.Add(pessoa);
+            Need_to_save = true;
+            return true;
+        }
+
+        public void Save()
+        {
+            if (!Need_to_save) { return; }
+            SavePessoaData();
+        }
+
+        private void SavePessoaData()
+        {
+            XmlSerializer srl = new XmlSerializer(typeof(List<Pessoa>), new XmlRootAttribute("Pessoas"));
+
+            using (StreamWriter writer = new StreamWriter(pessoas_path))
+            {
+                srl.Serialize(writer, pessoas);
+            }
+
+            MessageBox.Show("Dados salvos.");
+        }
+
+        public List<Pessoa> GetPessoas()
+        {
+            return pessoas;
+        }
+
+        private static AppData instance;
+
+        public bool Need_to_save { get => need_to_save; set => need_to_save = value; }
+
+        private AppData() {
+            ReadAppData();
+        }
+        public static AppData GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new AppData();
+            }
+            return instance;
+        }
+    }
+}

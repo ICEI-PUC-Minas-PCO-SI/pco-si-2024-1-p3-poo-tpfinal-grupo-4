@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    public interface ICobrancaImposto
+    {
+        float get_aliquota();
+
+        float get_valor_com_impostos();
+    }
+}
