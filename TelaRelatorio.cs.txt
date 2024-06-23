@@ -1,0 +1,177 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+
+    public partial class TelaRelatorio : Form
+    {
+        private AppData appData = AppData.GetInstance();
+        private ContaEnergia conta_selecionada;
+
+        public TelaRelatorio()
+        {
+            InitializeComponent();
+
+            update_tree_view();
+
+            mostrar_conta_selecionada();
+        }
+
+        private void update_tree_view()
+        {
+            TreeView tree = treeView1;
+
+            tree.Nodes.Clear();
+
+            TreeNode root = new TreeNode("Contas de Energia");
+
+            tree.Nodes.Add(root);
+
+            TreeNode contasResidenciais = new TreeNode("Residenciais");
+            TreeNode contasComerciais = new TreeNode("Comerciais");
+
+            root.Nodes.Add(contasResidenciais);
+            root.Nodes.Add(contasComerciais);
+
+            Pessoa consumidor = appData.GetConsumidorAtual();
+            List<ContaEnergia> contas = consumidor.ContasEnergia;
+
+            foreach (ContaEnergia conta in contas)
+            {
+                TreeNode newNode = new TreeNode(conta.Registro);
+                if (conta is ContaComercial) {
+                    contasComerciais.Nodes.Add(newNode);
+                }
+                else if (conta is ContaResidencial) {
+                    contasResidenciais.Nodes.Add(newNode);
+                }
+            }
+
+            tree.ExpandAll();
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            Pessoa consumidor = appData.GetConsumidorAtual();
+            string registro = e.Node.Text;
+            conta_selecionada = consumidor.ContasEnergia.Find(element => element.Registro == registro);
+            mostrar_conta_selecionada();
+        }
+
+        private void mostrar_conta_selecionada()
+        {
+            Label registro = label1;
+            Label tipo = label2;
+            Label periodo = label3;
+            Label consumo = label4;
+            Label consumo_ant = label5;
+
+            registro.Visible = tipo.Visible = periodo.Visible = consumo.Visible 
+                = consumo_ant.Visible = button2.Visible = button3.Visible = button6.Visible = (conta_selecionada != null);
+
+            if (conta_selecionada == null) {
+                return;
+            }
+
+            registro.Text    = "Registro " + conta_selecionada.Registro;
+            tipo.Text        = (conta_selecionada is ContaComercial) ? "Comercial" : "Residencial";
+            periodo.Text     = "Período: " + conta_selecionada.MesReferencia.Periodo + "/" + conta_selecionada.MesReferencia.Exercicio;
+            consumo.Text     = "Consumo: " + conta_selecionada.MesReferencia.Consumo_kWh.ToString();
+            consumo_ant.Text = "Consumo Anterior: " + conta_selecionada.MesAnterior.Consumo_kWh.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e) // Criar conta
+        {
+            TelaNovaConta telaNovaConta = new TelaNovaConta();
+            telaNovaConta.ShowDialog();
+            update_tree_view();
+        }
+
+        private void button2_Click(object sender, EventArgs e) // Calcular valor de conta selecionada
+        {
+            if (conta_selecionada == null) { return; }
+            float valor = conta_selecionada.CalculaValor();
+            MessageBox.Show("O valor dessa conta é " + valor.ToString(),"Valor da conta");
+        }
+
+        private void button3_Click(object sender, EventArgs e) // Calcular valor sem imposto de conta selecionada
+        {
+            if (conta_selecionada == null) { return; }
+            ICobrancaImposto conta_com_imposto = conta_selecionada as ICobrancaImposto;
+
+            float valor;
+
+            if (conta_com_imposto != null)
+            {
+                valor = conta_com_imposto.get_valor_com_impostos();
+            }
+            else
+            {
+                valor = conta_selecionada.CalculaValor();
+            }
+
+            MessageBox.Show("O valor com impostos é " + valor.ToString(), "Valor com impostos");
+        }
+
+        private void button5_Click(object sender, EventArgs e) // Total sem imposto
+        {
+            Pessoa consumidor = appData.GetConsumidorAtual();
+            float valor_total = 0;
+            foreach (ContaEnergia conta in consumidor.ContasEnergia)
+            {
+                valor_total += conta.CalculaValor();
+            }
+            MessageBox.Show("O valor total das contas é " + valor_total.ToString(), "Valor total");
+        }
+
+        private void button4_Click(object sender, EventArgs e) // Total com imposto
+        {
+            Pessoa consumidor = appData.GetConsumidorAtual();
+            float valor_total = 0;
+            foreach (ContaEnergia conta in consumidor.ContasEnergia)
+            {
+                ICobrancaImposto conta_com_imposto = conta as ICobrancaImposto;
+
+                if (conta_com_imposto != null ) { valor_total += conta_com_imposto.get_valor_com_impostos(); }
+                else { valor_total += conta.CalculaValor(); }
+
+            }
+            MessageBox.Show("O valor total com impostos é " + valor_total.ToString(), "Valor total com impostos");
+        }
+
+        private void button6_Click(object sender, EventArgs e) // Apagar conta selecionada
+        {
+            if (conta_selecionada == null) { return; }
+            Pessoa consumidor = appData.GetConsumidorAtual();
+
+            consumidor.ContasEnergia.Remove(conta_selecionada);
+            appData.Need_to_save = true;
+            conta_selecionada = null;
+            mostrar_conta_selecionada();
+            update_tree_view();
+            MessageBox.Show("Conta de energia apagada.", "Conta deletada");
+        }
+
+        private void button7_Click(object sender, EventArgs e) // Apagar consumidor
+        {
+            appData.GetPessoas().Remove(appData.GetConsumidorAtual());
+            appData.Need_to_save = true;
+            MessageBox.Show("Registro de consumidor apagado.", "Consumidor deletado");
+            this.Close();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            TelaCalculoMensal telaCalculoMensal = new TelaCalculoMensal();
+            telaCalculoMensal.ShowDialog();
+        }
+    }
+}
