@@ -1,0 +1,32 @@
+﻿using Controle_de_Contas_de_Energia.src;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Controle_de_Contas_de_Energia
+{
+    public partial class TelaCalculoMensal : Form
+    {
+        private AppData appData = AppData.GetInstance();
+        public TelaCalculoMensal()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int ano = (int)numericUpDown2.Value;
+            int mes = (int)numericUpDown1.Value;
+
+            float total = appData.GetConsumidorAtual().GetConsumoMensal(mes,ano);
+
+            MessageBox.Show("O consumo mensal foi " + total.ToString() + " kW/h", "Consumo Total");
+        }
+    }
+}
