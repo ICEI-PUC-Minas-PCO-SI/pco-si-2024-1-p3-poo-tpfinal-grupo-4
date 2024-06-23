@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    public partial class TelaNovaConta : Form
+    {
+        private AppData appData = AppData.GetInstance();
+        public TelaNovaConta()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Pessoa consumidor = appData.GetConsumidorAtual(); 
+
+            decimal ano = numericUpDown2.Value;
+            decimal mes = numericUpDown1.Value;
+            decimal consumo = numericUpDown3.Value;
+            decimal consumo_mes_anterior = numericUpDown4.Value;
+
+            LeituraConta mesReferencia = new LeituraConta();
+            mesReferencia.Exercicio = (int) ano;
+            mesReferencia.Periodo = (int) mes;
+            mesReferencia.Consumo_kWh = (int) consumo;
+
+            LeituraConta mesAnterior = new LeituraConta();
+            mesAnterior.Periodo = (int) (mes - 1);
+            mesAnterior.Exercicio = (int) ano;
+            mesAnterior.Consumo_kWh = (int) consumo_mes_anterior;
+
+            if (mesAnterior.Periodo == 0)
+            {
+                mesAnterior.Periodo = 12;
+                mesAnterior.Exercicio--;
+            }
+
+            ContaEnergia nova_conta;
+
+            if (radioButton1.Checked) {
+                nova_conta = new ContaComercial();
+            } else {
+                nova_conta = new ContaResidencial();
+            }
+
+            nova_conta.Registro = new_code(8);
+            nova_conta.MesReferencia = mesReferencia;
+            nova_conta.MesAnterior = mesAnterior;
+
+            consumidor.ContasEnergia.Add(nova_conta);
+            appData.Need_to_save = true;
+
+            MessageBox.Show("Conta criada.");
+            this.Close();
+        }
+
+        private string new_code(int tamanho)
+        {
+            const string caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            char[] chars = new char[tamanho];
+            Random random = new Random();
+
+            for (int i = 0; i < tamanho; i++)
+            {
+                chars[i] = caracteresPermitidos[random.Next(0, caracteresPermitidos.Length)];
+            }
+
+            return new string(chars);
+        }
+    }
+}
