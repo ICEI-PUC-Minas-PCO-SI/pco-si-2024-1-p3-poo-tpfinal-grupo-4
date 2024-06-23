@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Controle_de_Contas_de_Energia.src
+{
+    [Serializable]
+    public class ContaComercial : ContaEnergia, ICobrancaImposto
+    {
+        public ContaComercial() {
+            this.tarifa = 0.35F;
+        }
+        public override float CalculaValor()
+        {
+            float consumo_referencia = MesReferencia.Consumo_kWh;
+            float consumo_anterior = MesAnterior.Consumo_kWh;
+
+            float valor = (consumo_referencia - consumo_anterior) * this.tarifa;
+
+            valor += 9.25F; // Contribuição para iluminação pública
+
+            return valor;
+        }
+
+        public float get_aliquota()
+        {
+            return 0.18F; // 18% de alíquota
+        }
+
+        public float get_valor_com_impostos()
+        {
+            return this.CalculaValor() * (1 + this.get_aliquota());
+        }
+    }
+}
